@@ -42,7 +42,3 @@ terraform.rc
 # Uncomment the line below if you want to ignore planout files.
 # planout
 
-app.py
-Dockerfile
-terraform/
-.github/workflows/
