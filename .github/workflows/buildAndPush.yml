@@ -1,0 +1,49 @@
+name: buildAndPush
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+
+  setup-ECR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4 # More information on this action can be found below in the 'AWS Credentials' section
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{vars.AWS_REGION}}
+
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v2
+        
+
+      - name: terraform init
+        run: |
+          cd ./terraform
+          terraform init
+        working-directory: ./terraform
+        
+      - name: terraform apply
+        id: ecr-repo
+        run: |
+          terraform fmt
+          terraform apply -auto-approve
+
+      - name: Cache Terraform providers
+        uses: actions/cache@v3
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+
+ 
+
