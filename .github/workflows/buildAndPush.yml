@@ -30,9 +30,10 @@ jobs:
 
       - name: terraform init
         run: |
+          pwd
           cd /terraform
           terraform init
-        working-directory: ./terraform
+        working-directory: /terraform
         
       - name: terraform apply
         id: ecr-repo
