@@ -30,7 +30,7 @@ jobs:
 
       - name: terraform init
         run: |
-          cd ./terraform
+          cd /terraform
           terraform init
         working-directory: ./terraform
         
