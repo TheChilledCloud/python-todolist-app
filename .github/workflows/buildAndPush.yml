@@ -1,4 +1,4 @@
-name: buildAndPush
+name: buildAndPush 
 
 on:
   push:
@@ -10,30 +10,38 @@ permissions: read-all
 
 jobs:
 
-  setup-ECR:
-    runs-on: ubuntu-latest
+  Setup-ECR:
+    runs-on: ubuntu-Latest
     environment: production
+    defaults:
+      run:
+        working-directory: ./terraform  # Set working directory to terraform folder for all steps
+
     steps:
-      - name: checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4 # More information on this action can be found below in the 'AWS Credentials' section
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: ${{vars.AWS_REGION}}
 
-      - name: setup terraform
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        
 
-      - name: terraform init
+      - name: Cache Terraform providers
+        uses: actions/cache@v3
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: terraform-${{ hashFiles('**/.terraform.lock.hcl') }}        
+
+      - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform
 
       - name: Import Existing ECR (if any) # Check if ECR exists, then import to avoid recreation
-        working-directory: ./terraform
+        continue-on-error: true
         run: |
           if aws ecr describe-repositories --repository-names todolist_app_registry --region ${{vars.AWS_REGION}} >/dev/null 2>&1; then
             echo "ECR exists, importing to state..."
@@ -41,21 +49,8 @@ jobs:
           else
             echo "ECR doesn't exist yet, will create on apply."
           fi
-        env:
-          AWS_REGION: us-east-1
               
-      - name: terraform apply
-        id: ecr-repo
+      - name: Terraform Apply
         run: |
           terraform fmt
-          terraform apply -auto-approve
-        working-directory: ./terraform
-
-      - name: Cache Terraform providers
-        uses: actions/cache@v3
-        with:
-          path: ~/.terraform.d/plugin-cache
-          key: terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
-
- 
-
+          terraform apply -auto-approve 
