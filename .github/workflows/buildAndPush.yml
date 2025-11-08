@@ -33,6 +33,7 @@ jobs:
         working-directory: ./terraform
 
       - name: Import Existing ECR (if any) # Check if ECR exists, then import to avoid recreation
+        working-directory: ./terraform
         run: |
           if aws ecr describe-repositories --repository-names todolist-app-registry --region ${{vars.AWS_REGION}} >/dev/null 2>&1; then
             echo "ECR exists, importing to state..."
