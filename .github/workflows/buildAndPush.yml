@@ -37,7 +37,7 @@ jobs:
         run: |
           if aws ecr describe-repositories --repository-names todolist-app-registry --region ${{vars.AWS_REGION}} >/dev/null 2>&1; then
             echo "ECR exists, importing to state..."
-            terraform import todolist-app-registry.todolist-app-registry 115229011275.dkr.ecr.us-east-1.amazonaws.com/todolist-app-registry
+            terraform import aws_ecr_repository.todolist-app-registry 115229011275.dkr.ecr.us-east-1.amazonaws.com/todolist-app-registry
           else
             echo "ECR doesn't exist yet, will create on apply."
           fi
