@@ -31,6 +31,9 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
+      - name: Create Terraform plugin cache directory
+        run: mkdir -p $HOME/.terraform.d/plugin-cache
+
       - name: Cache Terraform providers
         uses: actions/cache@v3
         with:
