@@ -34,9 +34,9 @@ jobs:
 
       - name: Import Existing ECR (if any) # Check if ECR exists, then import to avoid recreation
         run: |
-          if aws ecr describe-repositories --repository-names your-ecr-repo-name --region us-east-1 >/dev/null 2>&1; then
+          if aws ecr describe-repositories --repository-names todolist-app-registry --region ${{vars.AWS_REGION}} >/dev/null 2>&1; then
             echo "ECR exists, importing to state..."
-            terraform import aws_ecr_repository.your_ecr_resource_name your-account-id.dkr.ecr.us-east-1.amazonaws.com/your-ecr-repo-name
+            terraform import aws_ecr_repository.todolist-app-registry 115229011275.dkr.ecr.us-east-1.amazonaws.com/your-ecr-repo-name
           else
             echo "ECR doesn't exist yet, will create on apply."
           fi
