@@ -3,6 +3,6 @@ variable "region" {
 }
 
 variable "registry_name" {
-  default = "todolist-app-registry"
+  default = "todolist_app_registry"
 }
 
