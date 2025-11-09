@@ -56,15 +56,15 @@ Run the pipeline
 ```
 .
 ├── .github/workflows/
-│ └── buildAndPush.yml # CI/CD pipeline
+│ └── buildAndPush.yml     # CI/CD pipeline
 ├── terraform/
-│ ├── ecr.tf # Infrastructure definition
+│ ├── ecr.tf               # Infrastructure definition
 │ ├── vars.tf
 │ └── provider.tf
 │ └── .terraform.lock.hcl
 ├── docker-files/
-│ └── Dockerfile # Container definition
-├── todo_app.py # Python application
+│ └── Dockerfile           # Container definition
+├── todo_app.py            # Python application
 ├── requirements.txt
 ├── .gitignore
 └── README.md
