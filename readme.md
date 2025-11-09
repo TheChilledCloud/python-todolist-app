@@ -1,12 +1,12 @@
-The aim of this project is to help me learning DevOps and its tools in a practical way, by applying its best practices and navigating my way through the bugs I encountered. I would appreciate your feedback on this project.
+# Python Todo-List DevOps Project
 
-In this project I containerized a Python todo-list application and automated its deployment to AWS ECR using DevOps tools
+This is my **first DevOps project** where I'm learning DevOps fundamentals through hands-on practice. I containerized a simple Python todo-list application and set up automated deployment to AWS ECR using modern DevOps tools. I'd really appreciate any feedback or suggestions for improvement!
 
-**Key Achievements:**
-- Dockerized a todo-list python application
-- Automated CI/CD pipeline using Github Actions
-- Utilized Infrastructure as Code using Terraform
-- Used AWS ECR as a cloud provider
+**What I Implemented:**
+- Dockerized a Python todo-list application
+- Created a CI/CD pipeline using GitHub Actions
+- Used Terraform for Infrastructure as Code
+- Deployed to AWS ECR
 
 ## 🛠 Tech Stack
 
@@ -29,23 +29,23 @@ In this project I containerized a Python todo-list application and automated its
 
 ### Prerequisites
 
-Docker 
-AWS CLI
-Terraform
-Github account
-AWS (for AWS deployment)
+- Docker 
+- AWS CLI
+- Terraform
+- Github account
+- AWS (for AWS deployment)
 
 #### Local Development
 
 Clone the repository
-git clone https://github.com/TheChilledCloud/python-todolist-app
-cd python-todolist-app
+```git clone https://github.com/TheChilledCloud/python-todolist-app```
+```cd python-todolist-app```
 
 Build Docker image
-docker build -t python-todo-app -f docker-files .
+```docker build -t python-todo-app -f docker-files/Dockerfile .```
 
 Run container locally
-docker run -p 5000:5000 python-todo-app
+```docker run -p 5000:5000 python-todo-app```
 
 ### Deploy to AWS
 
