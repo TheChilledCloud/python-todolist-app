@@ -13,7 +13,7 @@ This is my **first DevOps project** where I'm learning DevOps fundamentals throu
 | Category | Technologies |
 |----------|-------------|
 | **Containerization** | Docker, Amazon ECR |
-| **Cloud Platform** | AWS (ECS, ECR, S3) |
+| **Cloud Platform** | AWS ECR |
 | **IaC** | Terraform |
 | **CI/CD** | GitHub Actions |
 | **Programming** | Python |
@@ -37,23 +37,23 @@ This is my **first DevOps project** where I'm learning DevOps fundamentals throu
 
 #### Local Development
 
-Clone the repository
+- Clone the repository
 ```git clone https://github.com/TheChilledCloud/python-todolist-app```
 ```cd python-todolist-app```
 
-Build Docker image
+- Build Docker image
 ```docker build -t python-todo-app -f docker-files/Dockerfile .```
 
-Run container locally
+- Run container locally
 ```docker run -p 5000:5000 python-todo-app```
 
 ### Deploy to AWS
 
-fork the repository
-setup AWS Secret Access key, AWS Access Key ID & AWS Region and save in github secretes and variables
+Fork the repository, then setup AWS Secret Access key, AWS Access Key ID & AWS Region and save in github secretes and variables
 Run the pipeline
 
 ## Project Structure
+```
 .
 ├── .github/workflows/
 │ └── buildAndPush.yml # CI/CD pipeline
@@ -68,15 +68,16 @@ Run the pipeline
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+```
 
 ## CI/CD Pipeline
 
 The GitHub Actions workflow automates the following:
-1. **Infrastructure**: Terraform provisions/ updates AWS resource ECR
-2. **Build Stage**: Creates Docker image from application code
-3. **Push Stage**: Uploads the image ot AWS ECR
+- **Infrastructure**: Terraform provisions/ updates AWS resource ECR
+- **Build**: Creates Docker image from application code
+- **Push**: Uploads the image ot AWS ECR
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 Through this project, I gained hands-on experience with:
 - Containerizing applications with Docker
@@ -86,12 +87,12 @@ Through this project, I gained hands-on experience with:
 - Implementing DevOps best practices
 - Git version control
 
-## 🔐 Security Considerations
+## Security Considerations
 
 - AWS credentials managed via GitHub Secrets
 - Minimal IAM permissions following least privilege
 
-## 🤝 Connect
+## Connect
 
 Built as part of my DevOps learning journey. Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/ahmad-alfaisal/)
 
